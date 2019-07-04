@@ -1,6 +1,8 @@
+import token from "./githubkey.js";
+
 export class Request {
   constructor() {
-    this.GITHUB_TOKEN = "15feb56dc698a1ecf7ec5e02e4b4e75ba964693d";
+    this.GITHUB_TOKEN = token;
     this.BASE_USER_URL = "https://api.github.com/users/";
     this.SEARCH_USER_URL = "https://api.github.com/search/users";
     this.QUERY = "?q=";
