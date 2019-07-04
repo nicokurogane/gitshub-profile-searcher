@@ -53,10 +53,10 @@ export class UI {
 
   static setUsersRepositories(repos) {
     let repoContainer = document.getElementById("repo-list-container");
-    while(repoContainer.firstChild){
-        repoContainer.removeChild(repoContainer.firstChild);
+    while (repoContainer.firstChild) {
+      repoContainer.removeChild(repoContainer.firstChild);
     }
-    
+
     repos.forEach(repo => {
       let newRepo = `<h5>${repo.name}</h5>
         <div class="repo-details">
@@ -66,9 +66,21 @@ export class UI {
              <span><a href="${repo.html_url}">${repo.html_url}</a></span>
         </div>`;
       const divRepo = document.createElement("div");
-      divRepo.classList.add("repo-info","border-bottom");
+      divRepo.classList.add("repo-info", "border-bottom");
       divRepo.innerHTML = newRepo;
       repoContainer.appendChild(divRepo);
     });
+  }
+
+  static showErrorMessage(msg) {
+    let msgLabel = document.getElementById("error-msg");
+    msgLabel.innerText = msg;
+    msgLabel.classList.remove("hide-msg");
+  }
+
+  static resetMessage() {
+    let msgLabel = document.getElementById("error-msg");
+    msgLabel.innerText = "";
+    msgLabel.classList.add("hide-msg");
   }
 }

@@ -3,23 +3,31 @@ import { UI } from "./classes/UI.js";
 
 let requestHandler = new Request();
 
-// document.getElementById("github-user-form").addEventListener("submit",(e)=>{
-//   e.preventDefault();
-//   let username = document.getElementById("username").value;
-//   findUserProfileInfo(username);
-// });
+document.getElementById("github-user-form").addEventListener("submit", e => {
+  UI.resetMessage();
+  e.preventDefault();
+  let username = document.getElementById("username").value;
+  findUserProfileInfo(username);
+});
 
 document.getElementById("username").addEventListener("keyup", e => {
+  UI.resetMessage();
   e.preventDefault();
   let username = e.target.value;
   if (username !== "") findUserProfileInfo(username);
+  else UI.showErrorMessage("username can't be empty");
 });
 
 function findUserProfileInfo(username) {
   requestHandler
     .searchUserProfile(username)
     .then(userInfo => {
-      fetchingMissingData(userInfo.items[0]);
+      console.log(userInfo);
+      if (userInfo.message === "Validation Failed") {
+        UI.showErrorMessage("username couldn't be found.");
+      } else {
+        fetchingMissingData(userInfo.items[0]);
+      }
     })
     .catch(err => console.log(err));
 }
